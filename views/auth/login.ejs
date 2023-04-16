@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include('../layouts/head.ejs') %>
+
+    <body>
+        <header class="main-header">
+            <%- include('../layouts/navigation.ejs') %>
+        </header>
+
+        <main>
+            <% if (errorMessage) { %>
+                <div class="user-message"><%= errorMessage %></div>
+            <% } %>
+            <form class="product-form" action="/login" method="POST">
+                <div class="form-control">
+                    <label for="email">Email</label>
+                    <input class="<%= validationErrors.find(e => e.param === 'email') ? 'invalid' : ''  %>" type="text" name="email" id="email" value="<%= oldInput.email %>">
+                </div>
+                <div class="form-control">
+                    <label for="password">Password</label>
+                    <input class="<%= validationErrors.find(e => e.param === 'password') ? 'invalid' : ''  %>" type="password" name="password" id="password" value="<%= oldInput.password %>">
+                </div>
+                <input type="hidden" value="<%= csrfToken %>" name="_csrf">
+                <button type="submit">Login</button>
+            </form>
+    </body>
+
+</html>
